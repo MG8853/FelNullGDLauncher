@@ -37,6 +37,7 @@ import HorizontalLogo from '../../../../ui/HorizontalLogo';
 import { updateConcurrentDownloads } from '../../../reducers/actions';
 import { openModal } from '../../../reducers/modals/actions';
 import { extractFace } from '../../../../app/desktop/utils';
+import i18n from '../../../config/i18next';
 
 const MyAccountPrf = styled.div`
   width: 100%;
@@ -325,7 +326,7 @@ const General = () => {
   return (
     <MyAccountPrf>
       <PersonalData>
-        <MainTitle>General</MainTitle>
+        <MainTitle>{i18n.t('settings:general')}</MainTitle>
         <PersonalDataContainer>
           {profileImage ? (
             <ProfileImage src={`data:image/jpeg;base64,${profileImage}`} />
@@ -339,7 +340,7 @@ const General = () => {
             `}
           >
             <UsernameContainer>
-              Username <br />
+              {i18n.t('settings:username')} <br />
               <Username>{currentAccount.selectedProfile.name}</Username>
             </UsernameContainer>
             <UuidContainer>
@@ -373,39 +374,43 @@ const General = () => {
         </PersonalDataContainer>
       </PersonalData>
       <Hr />
-      {/*      <ReleaseChannel> */}
-      {/*        <Title>Release Channel</Title> */}
-      {/*        <div> */}
-      {/*          <div */}
-      {/*            css={` */}
-      {/*              width: 400px; */}
-      {/*            `} */}
-      {/*          > */}
-      {/*            Stable updates once a month, beta does update more often but it may */}
-      {/*            have more bugs. */}
-      {/*          </div> */}
-      {/*          <Select */}
-      {/*            css={` */}
-      {/*              width: 100px; */}
-      {/*            `} */}
-      {/*            onChange={async e => { */}
-      {/*              const appData = await ipcRenderer.invoke('getAppdataPath'); */}
-      {/*              setReleaseChannel(e); */}
-      {/*              await fsa.writeFile( */}
-      {/*                path.join(appData, 'felnullgdlauncher_next', 'rChannel'), */}
-      {/*                e */}
-      {/*              ); */}
-      {/*            }} */}
-      {/*            value={releaseChannel} */}
-      {/*          > */}
-      {/*            <Select.Option value={0}>Stable</Select.Option> */}
-      {/*            <Select.Option value={1}>Beta</Select.Option> */}
-      {/*          </Select> */}
-      {/*        </div> */}
-      {/*      </ReleaseChannel> */}
+      <ReleaseChannel>
+        <Title>{i18n.t('settings:release_channel.title')}</Title>
+        <div>
+          <div
+            css={`
+              width: 400px;
+            `}
+          >
+            {i18n.t('settings:release_channel.description')}
+          </div>
+          <Select
+            css={`
+              width: 100px;
+            `}
+            onChange={async e => {
+              const appData = await ipcRenderer.invoke('getAppdataPath');
+              setReleaseChannel(e);
+              await fsa.writeFile(
+                path.join(appData, 'gdlauncher_next', 'rChannel'),
+                e
+              );
+            }}
+            value={releaseChannel}
+          >
+            <Select.Option value={0}>
+              {i18n.t('settings:release_channel.select.stable')}
+            </Select.Option>
+            <Select.Option value={1}>
+              {i18n.t('settings:release_channel.select.beta')}
+            </Select.Option>
+          </Select>
+        </div>
+      </ReleaseChannel>
       <Hr />
       <Title>
-        Concurrent Downloads &nbsp; <FontAwesomeIcon icon={faTachometerAlt} />
+        {i18n.t('settings:concurrent_downloads.title')}
+        &nbsp; <FontAwesomeIcon icon={faTachometerAlt} />
       </Title>
       <ParallelDownload>
         <p
@@ -414,7 +419,7 @@ const General = () => {
             width: 400px;
           `}
         >
-          同時にダウンロードやインストールをできる最大値を設定します。「推奨：３」
+          {i18n.t('settings:concurrent_downloads.description')}
         </p>
 
         <Select
@@ -436,7 +441,8 @@ const General = () => {
       </ParallelDownload>
       <Hr />
       <Title>
-        Preferred Curse Release Channel &nbsp; <FontAwesomeIcon icon={faFire} />
+        {i18n.t('settings:preferred_curse_release_channel.title')}
+        &nbsp; <FontAwesomeIcon icon={faFire} />
       </Title>
       <ParallelDownload>
         <p
@@ -445,7 +451,7 @@ const General = () => {
             width: 400px;
           `}
         >
-          Twitch・Curseのプロジェクトをダウンロードするときに優先するリリースを設定します。これはModPackの更新にも適用されます。
+          {i18n.t('settings:preferred_curse_release_channel.description')}
         </p>
         <Select
           css={`
@@ -455,9 +461,15 @@ const General = () => {
           onChange={e => dispatch(updateCurseReleaseChannel(e))}
           value={curseReleaseChannel}
         >
-          <Select.Option value={1}>Stable</Select.Option>
-          <Select.Option value={2}>Beta</Select.Option>
-          <Select.Option value={3}>Alpha</Select.Option>
+          <Select.Option value={1}>
+            {i18n.t('settings:preferred_curse_release_channel.select.stable')}
+          </Select.Option>
+          <Select.Option value={2}>
+            {i18n.t('settings:preferred_curse_release_channel.select.beta')}
+          </Select.Option>
+          <Select.Option value={3}>
+            {i18n.t('settings:preferred_curse_release_channel.select.alpha')}
+          </Select.Option>
         </Select>
       </ParallelDownload>
       <Hr />
@@ -466,7 +478,8 @@ const General = () => {
           margin-top: 0px;
         `}
       >
-        Discord Game Active &nbsp; <FontAwesomeIcon icon={faDiscord} />
+        {i18n.t('settings:discord_integration.title')}
+        &nbsp; <FontAwesomeIcon icon={faDiscord} />
       </Title>
       <DiscordRpc>
         <p
@@ -474,7 +487,7 @@ const General = () => {
             width: 350px;
           `}
         >
-          有効にするとDiscordで～～～プレイ中の表示をすることができます。
+          {i18n.t('settings:discord_integration.description')}
         </p>
         <Switch
           onChange={e => {
@@ -494,7 +507,8 @@ const General = () => {
           margin-top: 0px;
         `}
       >
-        Minecraft News &nbsp; <FontAwesomeIcon icon={faNewspaper} />
+        {i18n.t('settings:minecraft_news.title')}
+        &nbsp; <FontAwesomeIcon icon={faNewspaper} />
       </Title>
       <DiscordRpc>
         <p
@@ -502,7 +516,7 @@ const General = () => {
             width: 350px;
           `}
         >
-          有効にするとMinecraft公式の最新のニュースをホームに表示します。
+          {i18n.t('settings:minecraft_news.description')}
         </p>
         <Switch
           onChange={e => {
@@ -517,7 +531,8 @@ const General = () => {
           margin-top: 0px;
         `}
       >
-        Hide Launcher While Playing &nbsp; <FontAwesomeIcon icon={faPlay} />
+        {i18n.t('settings:hide_launcher_while_playing.title')}
+        &nbsp; <FontAwesomeIcon icon={faPlay} />
       </Title>
       <DiscordRpc
         css={`
@@ -529,7 +544,7 @@ const General = () => {
             width: 500px;
           `}
         >
-          有効にしてマインクラフトを起動するとランチャーを自動的に非表示にします。タスクバーのトレイから再度開くことができます。
+          {i18n.t('settings:hide_launcher_while_playing.description')}
         </p>
         <Switch
           onChange={e => {
@@ -544,7 +559,8 @@ const General = () => {
           margin-top: 0px;
         `}
       >
-        Potato PC Mode &nbsp; <FontAwesomeIcon icon={faToilet} />
+        {i18n.t('settings:potato_pc_mode.title')}
+        &nbsp; <FontAwesomeIcon icon={faToilet} />
       </Title>
       <DiscordRpc
         css={`
@@ -556,7 +572,7 @@ const General = () => {
             width: 500px;
           `}
         >
-          あなたのパソコンはそんなに性能が低いのですか？これを有効にするとすべてのアニメーションと特殊効果が無効になります。
+          {i18n.t('settings:potato_pc_mode.description')}
         </p>
         <Switch
           onChange={e => {
@@ -572,7 +588,8 @@ const General = () => {
           float: left;
         `}
       >
-        Clear Shared Data&nbsp; <FontAwesomeIcon icon={faTrash} />
+        {i18n.t('settings:clear_shared_data.title')}
+        &nbsp; <FontAwesomeIcon icon={faTrash} />
       </Title>
       <div
         css={`
@@ -593,7 +610,7 @@ const General = () => {
             width: 500px;
           `}
         >
-          今までのマイクラのデータをすべて削除します。
+          {i18n.t('settings:clear_shared_data.description')}
         </p>
         <Button
           onClick={() => {
@@ -620,7 +637,8 @@ const General = () => {
             float: left;
           `}
         >
-          User Data Path&nbsp; <FontAwesomeIcon icon={faFolder} />
+          {i18n.t('settings:user_data_path.title')}
+          &nbsp; <FontAwesomeIcon icon={faFolder} />
           <a
             css={`
               margin-left: 30px;
@@ -631,7 +649,7 @@ const General = () => {
               setDataPath(appDataPath);
             }}
           >
-            Reset Path
+            {i18n.t('settings:user_data_path.reset')}
           </a>
         </Title>
         <div
@@ -680,7 +698,7 @@ const General = () => {
             }
             loading={loadingMoveUserData}
           >
-            Apply & Restart
+            {i18n.t('settings:user_data_path.appry_and_restart')}
           </Button>
         </div>
         <div
@@ -695,7 +713,7 @@ const General = () => {
               setMoveUserData(e.target.checked);
             }}
           >
-            データを古いフォルダから新しいフォルダへ移動する
+            {i18n.t('settings:user_data_path.copy_current_data')}
           </Checkbox>
         </div>
       </CustomDataPathContainer>
@@ -724,8 +742,8 @@ const General = () => {
         </div>
         <p>
           {updateAvailable
-            ? 'アップデートがあります。今すぐ更新しましょう！'
-            : 'アップデートはありません。'}
+            ? i18n.t('settings:update.update_avaliable_message')
+            : i18n.t('settings:update.up_to_date_message')}
         </p>
         <div
           css={`
@@ -745,7 +763,8 @@ const General = () => {
               `}
               type="primary"
             >
-              アップデートを実行する！ &nbsp;
+              {i18n.t('settings:update.update_button_label')}
+              &nbsp;
               <FontAwesomeIcon icon={faDownload} />
             </Button>
           ) : (
@@ -756,7 +775,7 @@ const General = () => {
                 padding: 6px 8px;
               `}
             >
-              Latest
+              {i18n.t('settings:update.up_to_date_label')}
             </div>
           )}
         </div>

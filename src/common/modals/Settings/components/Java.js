@@ -25,6 +25,7 @@ import {
 } from '../../../../app/desktop/utils/constants';
 import { _getJavaPath } from '../../../utils/selectors';
 import { openModal } from '../../../reducers/modals/actions';
+import i18n from '../../../config/i18next';
 
 const JavaSettings = styled.div`
   width: 100%;
@@ -126,14 +127,15 @@ export default function MyAccountPreferences() {
 
   return (
     <JavaSettings>
-      <MainTitle>Java</MainTitle>
+      <MainTitle>{i18n.t('settings:java')}</MainTitle>
       <Title
         css={`
           width: 500px;
           text-align: left;
         `}
       >
-        Autodetect Java Path&nbsp; <FontAwesomeIcon icon={faJava} />
+        {i18n.t('settings:autodetect_path.title')}
+        &nbsp; <FontAwesomeIcon icon={faJava} />
         <a
           css={`
             margin-left: 30px;
@@ -142,7 +144,7 @@ export default function MyAccountPreferences() {
             dispatch(openModal('JavaSetup'));
           }}
         >
-          再度Javaをセットアップ
+          {i18n.t('settings:autodetect_path.run_java_setup_again')}
         </a>
       </Title>
       <AutodetectPath>
@@ -151,7 +153,7 @@ export default function MyAccountPreferences() {
             text-align: left;
           `}
         >
-          これを無効にした場合、自分でjava.exe(64bit)を選択する必要があります。
+          {i18n.t('settings:autodetect_path.description')}
         </Paragraph>
         <Switch
           color="primary"
@@ -219,7 +221,8 @@ export default function MyAccountPreferences() {
             margin-bottom: 20px;
           `}
         >
-          Game Resolution&nbsp; <FontAwesomeIcon icon={faDesktop} />
+          {i18n.t('settings:resolution.title')}
+          &nbsp; <FontAwesomeIcon icon={faDesktop} />
         </Title>
         <Paragraph
           css={`
@@ -228,8 +231,7 @@ export default function MyAccountPreferences() {
             margin: 0;
           `}
         >
-          マイクラ起動時のウィンドウサイズを指定します 「width：横 x
-          height：縦」
+          {i18n.t('settings:resolution.description')}
         </Paragraph>
         <ResolutionInputContainer>
           <div>
@@ -298,7 +300,7 @@ export default function MyAccountPreferences() {
             margin: 0;
           `}
         >
-          マイクラに使用する最大メモリ量を選択します。※パソコンの利用可能なメモリ量を超えて設定するとメモリの限界まで使用されます。
+          {i18n.t('settings:select_memory.description')}
         </Paragraph>
         <Slider
           css={`
@@ -323,14 +325,15 @@ export default function MyAccountPreferences() {
             text-align: left;
           `}
         >
-          Java Custom Arguments &nbsp; <FontAwesomeIcon icon={faList} />
+          {i18n.t('settings:java_custom_arguments.title')}
+          &nbsp; <FontAwesomeIcon icon={faList} />
         </Title>
         <Paragraph
           css={`
             text-align: left;
           `}
         >
-          マイクラに使用する引数を設定します。※高度な設定
+          {i18n.t('settings:java_custom_arguments.description')}
         </Paragraph>
         <div
           css={`
