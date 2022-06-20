@@ -425,7 +425,9 @@ const Instance = ({ instanceName }) => {
                   instance.loader,
                   manifest,
                   instance.background,
-                  instance.timePlayed
+                  instance.timePlayed,
+                  {},
+                  { isUpdate: true }
                 )
               );
             }}

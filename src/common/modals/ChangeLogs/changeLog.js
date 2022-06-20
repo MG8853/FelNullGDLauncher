@@ -1,10 +1,10 @@
 module.exports = {
-  new: [{}],
-  improvements: [{}],
+  new: [],
+  improvements: [],
   bugfixes: [
     {
-      header: 'CurseForgeAPIを変更しました',
-      content: 'これでGDも復活じゃーーー！',
+      header: 'Fixed cloudflare blocking opted out mods during download.',
+      content: '',
       advanced: { cm: '' }
     }
   ]
