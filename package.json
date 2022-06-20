@@ -1,6 +1,6 @@
 {
   "name": "felnullgdlauncher",
-  "version": "1.1.25-felnull.3",
+  "version": "1.1.25-felnull.4",
   "description": "FelNullGDlauncherはシンプルでありながら、ユーザーエクスペリエンスに重点を置いた強力なMinecraftカスタムランチャーです。",
   "keywords": [
     "minecraft",
@@ -119,6 +119,7 @@
     "babel-preset-minify": "^0.5.1",
     "concurrently": "^6.2.1",
     "cross-env": "^7.0.3",
+    "discord-rpc": "^4.0.1",
     "dotenv": "^10.0.0",
     "electron": "^19.0.4",
     "electron-builder": "^23.0.3",
