@@ -430,7 +430,7 @@ const ModsBrowser = ({ instanceName, gameVersions }) => {
         width: 90%;
         max-width: 1500px;
       `}
-      title="Instance Manager"
+      title="インスタンス設定"
     >
       <Container>
         <Header>
@@ -444,12 +444,14 @@ const ModsBrowser = ({ instanceName, gameVersions }) => {
             disabled={areModsLoading}
             virtual={false}
           >
-            <Select.Option value="Featured">Featured</Select.Option>
-            <Select.Option value="Popularity">Popularity</Select.Option>
-            <Select.Option value="LastUpdated">Last Updated</Select.Option>
-            <Select.Option value="Name">Name</Select.Option>
-            <Select.Option value="Author">Author</Select.Option>
-            <Select.Option value="TotalDownloads">Downloads</Select.Option>
+            <Select.Option value="Featured">注目</Select.Option>
+            <Select.Option value="Popularity">人気</Select.Option>
+            <Select.Option value="LastUpdated">最新</Select.Option>
+            <Select.Option value="Name">Mod名</Select.Option>
+            <Select.Option value="Author">作成者名</Select.Option>
+            <Select.Option value="TotalDownloads">
+              最多ダウンロード
+            </Select.Option>
           </Select>
           <Select
             placeholder="Minecraft Category"
@@ -495,7 +497,7 @@ const ModsBrowser = ({ instanceName, gameVersions }) => {
             css={`
               height: 32px !important;
             `}
-            placeholder="Search..."
+            placeholder="Mod検索..."
             value={searchQuery}
             onChange={e => {
               setSearchQuery(e.target.value);
@@ -523,7 +525,7 @@ const ModsBrowser = ({ instanceName, gameVersions }) => {
                   margin-top: 70px;
                 `}
               >
-                No mods has been found with the current filters.
+                Modが見つかりませんでした。
               </div>
             </div>
           ) : (
@@ -562,7 +564,7 @@ const ModsBrowser = ({ instanceName, gameVersions }) => {
                 margin-top: 70px;
               `}
             >
-              An error occurred while loading the mods list...
+              Modsリストの読み込み中にエラーが発生しました...
             </div>
           </div>
         )}

@@ -111,7 +111,7 @@ const FTBModpacks = ({ setStep, setModpack, setVersion }) => {
                   margin-top: 70px;
                 `}
               >
-                No modpack has been found with the current filters.
+                ModPackが見つかりませんでした。
               </div>
             </div>
           ) : (
@@ -149,7 +149,7 @@ const FTBModpacks = ({ setStep, setModpack, setVersion }) => {
                 margin-top: 70px;
               `}
             >
-              An error occurred while loading the modpacks list...
+              ModPackリストのロード中にエラーが発生しました...
             </div>
           </div>
         )}

@@ -72,7 +72,7 @@ const ModChangelog = ({ modpackId, files, type, modpackName }) => {
             setSelectedId(v);
             loadChangelog(v);
           }}
-          placeholder="Select a version"
+          placeholder="バージョン選択"
           virtual={false}
         >
           {(files || []).map(v => (

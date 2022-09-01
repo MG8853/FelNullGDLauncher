@@ -1,15 +1,10 @@
-name: GDLauncher CI
+name: FelNullGDLauncher CI
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - master
-      - releases
-      - native-refactor
-  pull_request:
-    branches:
-      - master
-      - releases
+    tags:
+      - 'v1.1.*'
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -35,7 +30,7 @@ jobs:
       - name: Install Nightly
         run: |
           rustup toolchain install nightly
-          
+
       - name: Install rust (Windows)
         if: matrix.os == 'windows-latest'
         run: |
@@ -56,9 +51,52 @@ jobs:
       - name: npm run install
         run: |
           npm i
+
       - name: npm run lint
         run: |
           npm run lint
+
+      ##Tag Number input
+      - name: Get latest release version tag number
+        id: get_version
+        uses: battila7/get-version-action@v2
+      ##ReleaseChannel - go!
+      - name: Create Release
+        if: matrix.os == 'macos-latest'
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+        with:
+          tag_name: ${{ steps.get_version.outputs.version }}
+          release_name: FelNullLauncher - ${{ steps.get_version.outputs.version }}
+          body: |
+            ダウンロードはこちらから！
+            [Windows](https://github.com/${{ github.repository }}/releases/download/${{ steps.get_version.outputs.version }}/FelNullGDLauncher-win-setup.exe)
+            [Mac OS X](https://github.com/${{ github.repository }}/releases/download/${{ steps.get_version.outputs.version }}/FelNullGDLauncher-mac-setup.dmg)
+            [Linux](https://github.com/${{ github.repository }}/releases/download/${{ steps.get_version.outputs.version }}/FelNullGDLauncher-linux-setup.AppImage)
+
+            Windows : [FelNullGDLauncher-win-setup.exe]を実行すると自動的にインストールが開始し、ソフトが起動します。
+            Mac OS X : [FelNullGDLauncher-mac-setup.dmg]を実行してアプリをアプリケーションにコピーしてください。
+            Linux : どれでもできればよし！
+
+            ※データフォルダリンク例
+            Mac OS X
+            /Users/ [user] /Library/Application Support/felnullgdlaucher
+            /Users/ [user] /Library/Application Support/felnullgdlaucher_next
+
+            Windows
+            C:\Users\ [user] \AppData\Roaming\felnullgdlauncher
+            C:\Users\ [user] \AppData\Roaming\felnullgdlauncher_next
+            
+            Linuxわからん
+
+            Build by ${{ github.actor }}
+          draft: false
+          prerelease: false
+
+
+
       - name: npm run release for windows
         if: matrix.os == 'windows-latest' && github.event_name == 'push'
         env:
@@ -69,10 +107,7 @@ jobs:
           BITRISE_GIT_TAG: ''
           GITHUB_ACTIONS: ''
           CI_BUILD_TAG: ''
-          SENTRY_DSN: "${{ github.ref == 'refs/heads/releases' && secrets.SENTRY_DSN || '' }}"
-          SOURCE_MAPS_UPLOAD: "${{ github.ref == 'refs/heads/releases' && secrets.SENTRY_UPLOAD_SOURCE_MAPS_URL || '' }}"
-          SENTRY_AUTH: "${{ github.ref == 'refs/heads/releases' && secrets.SENTRY_AUTH || '' }}"
-          REACT_CF_API_KEY: "${{ secrets.CF_API_KEY }}"
+          RELEASE_TESTING: true
         run: |
           npm run release
       - name: npm run release for mac and linux
@@ -85,35 +120,55 @@ jobs:
           GITHUB_ACTIONS: ''
           BITRISE_GIT_TAG: ''
           CI_BUILD_TAG: ''
-          SENTRY_DSN: "${{ github.ref == 'refs/heads/releases' && secrets.SENTRY_DSN || '' }}"
-          SOURCE_MAPS_UPLOAD: "${{ github.ref == 'refs/heads/releases' && secrets.SENTRY_UPLOAD_SOURCE_MAPS_URL || '' }}"
-          SENTRY_AUTH: "${{ github.ref == 'refs/heads/releases' && secrets.SENTRY_AUTH || '' }}"
-          REACT_CF_API_KEY: "${{ secrets.CF_API_KEY }}"
+          RELEASE_TESTING: true
         run: |
-          npm run release
-      - name: upload release to gh releases
-        if: github.event_name == 'push' && github.ref == 'refs/heads/releases'
-        env:
-          GH_ACCESS_TOKEN_RELEASES: ${{ secrets.GH_ACCESS_TOKEN_RELEASES }}
-        run: |
-          npm run upload
+          pm run release
+          
+          
+
+      ##ActionRelease - zip
       - uses: actions/upload-artifact@v1
+        name: Action-Upload-MacOS
         if: matrix.os == 'macos-latest'
         with:
           name: MacOs Release
           path: deploy
-
       - uses: actions/upload-artifact@v1
+        name: Action-Upload-Windows
         if: matrix.os == 'windows-latest'
         with:
           name: Windows Release
           path: deploy
-
       - uses: actions/upload-artifact@v1
+        name: Action-Upload-Ubuntu
         if: matrix.os == 'ubuntu-latest'
         with:
           name: Linux Release
           path: deploy
+
+
+      ##GitHub-Release-Upload
+      - uses: xresloader/upload-to-github-release@v1
+        name: Upload Release File - MacOS
+        if: matrix.os != 'windows-latest'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+        with:
+          file: "deploy"
+          tags: true
+          draft: false
+          tag_name: ${{ steps.get_version.outputs.version }}
+      - uses: xresloader/upload-to-github-release@v1
+        name: Upload Release File - Windows
+        if: matrix.os == 'windows-latest'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+        with:
+          file: "deploy"
+          tags: true
+          draft: false
+          overwrite: true
+          tag_name: ${{ steps.get_version.outputs.version }}
 
       - uses: actions/setup-ruby@v1
       - name: Send Webhook Notification

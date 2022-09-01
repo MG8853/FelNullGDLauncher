@@ -5,6 +5,22 @@ const PrivacyPolicy = () => {
     <>
       <h1>Privacy Policy</h1>
       <div>
+        <h2>プライバシーポリシーについて</h2>
+        <div>
+          <p>
+            FelNullGDLauncherは、Fork元「GDLauncher」のPrivacy
+            Policyを使用します。{' '}
+            <a
+              target="_blank"
+              rel="nofollow noreferrer"
+              href="https://gdlauncher.com"
+            >
+              gdlauncher.com
+            </a>{' '}
+          </p>
+        </div>
+      </div>
+      <div>
         <h2>Introduction</h2>
         <div>
           <p>

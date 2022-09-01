@@ -39,7 +39,7 @@ const InstanceDeleteConfirmation = ({ instanceName }) => {
       title="Confirm Instance Deletion"
     >
       <div>
-        Are you sure you want to delete:
+        インスタンス[ModPack]:
         <h4
           css={`
             font-style: italic;
@@ -49,8 +49,7 @@ const InstanceDeleteConfirmation = ({ instanceName }) => {
         >
           {instanceName}
         </h4>
-        This action is permanent and cannot be undone. You will lose all the
-        data you have in this instance
+        これを実行するとこのインスタンスは完全に削除されます。実行してもよろしいですか？
         <div
           css={`
             margin-top: 50px;
@@ -65,10 +64,10 @@ const InstanceDeleteConfirmation = ({ instanceName }) => {
             color="primary"
             disabled={loading}
           >
-            No, Abort
+            いいえ
           </Button>
           <Button onClick={deleteInstance} loading={loading}>
-            Yes, Delete
+            完全削除
           </Button>
         </div>
       </div>

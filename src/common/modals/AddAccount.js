@@ -99,8 +99,8 @@ const AddAccount = ({ username }) => {
   return (
     <Modal
       css={`
-        height: 450px;
-        width: 420px;
+        height: 500px;
+        width: 500x;
       `}
       title=" "
     >

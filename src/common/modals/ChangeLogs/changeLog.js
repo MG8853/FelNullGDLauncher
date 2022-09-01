@@ -3,29 +3,19 @@ module.exports = {
   improvements: [],
   bugfixes: [
     {
-      header: 'No longer killing the game',
-      content: 'when closing the Launcher.',
+      header: 'ランチャーを閉じた時にゲームを強制終了させてしまうバグを修正',
+      content: 'ランチャーを閉じてもゲームは継続されます。',
       advanced: { cm: '391dd9cc', pr: '1412' }
     },
     {
-      header: 'Fixed the game resolution setting',
-      content: 'being ignored.',
+      header: 'ゲームの解像度に関するバグを修正',
+      content: '設定が反映されないバグがありました。',
       advanced: { cm: '87f89ed9', pr: '1429' }
     },
     {
-      header: 'Fixed the kill button',
-      content: 'having to be clicked twice.',
-      advanced: { cm: '2664f8bb', pr: '1419' }
-    },
-    {
-      header: 'Fixed error code one ',
-      content: 'when certain java args are missing.',
+      header: 'エラーコード１を修正',
+      content: 'Javaの引数が足りていませんでした。',
       advanced: { cm: 'cdae501a', pr: '1420' }
-    },
-    {
-      header: 'Fixed settings resetting',
-      content: 'caused by the CurseForge workaround.',
-      advanced: { cm: '7f29ca64', pr: '1431' }
     }
   ]
 };

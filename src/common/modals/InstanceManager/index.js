@@ -162,7 +162,7 @@ const PlayButtonAnimation = keyframes`
 
 const menuEntries = {
   overview: {
-    name: 'Overview',
+    name: '概要 / 設定',
     component: AsyncComponent(lazy(() => import('./Overview')))
   },
   mods: {
@@ -174,17 +174,17 @@ const menuEntries = {
     component: AsyncComponent(lazy(() => import('./Modpack')))
   },
   notes: {
-    name: 'Notes',
+    name: 'メモ',
     component: AsyncComponent(lazy(() => import('./Notes')))
   },
   resourcePacks: {
-    name: 'Resource Packs',
+    name: 'リソースパック',
     component: AsyncComponent(lazy(() => import('./ResourcePacks')))
   },
   // resourcePacks: { name: "Resource Packs", component: Overview },
   // worlds: { name: "Worlds", component: Overview },
   screenshots: {
-    name: 'Screenshots',
+    name: 'スクリーンショット',
     component: AsyncComponent(lazy(() => import('./Screenshots')))
   }
   // settings: { name: "Settings", component: Overview },
@@ -264,7 +264,7 @@ const InstanceManager = ({ instanceName }) => {
         width: 85%;
         max-width: 1500px;
       `}
-      title={`Instance Manager - ${instanceName}`}
+      title={`インスタンス設定 - ${instanceName}`}
       removePadding
     >
       <Container>
@@ -272,7 +272,7 @@ const InstanceManager = ({ instanceName }) => {
           <SideMenu>
             <InstanceBackground onClick={openFileDialog} imagePath={background}>
               <Overlay />
-              <p>Change Icon</p>
+              <p>アイコン変更</p>
               {background && (
                 <FontAwesomeIcon
                   icon={faTimesCircle}

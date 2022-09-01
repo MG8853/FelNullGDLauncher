@@ -112,7 +112,7 @@ const ModpacksListWrapper = ({
               selectFTBModpack(modpack, setVersion, setModpack, setStep);
             }}
           >
-            Download Latest
+            最新版をダウンロード
           </div>
           <div
             onClick={() => {
@@ -127,7 +127,7 @@ const ModpacksListWrapper = ({
               );
             }}
           >
-            Explore / Versions
+            詳細 / その他バージョン
           </div>
         </ModpackHover>
       </div>

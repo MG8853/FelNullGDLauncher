@@ -85,14 +85,13 @@ const JavaSetup = () => {
             </div>
             <div
               css={`
-                margin-bottom: 20px;
+                margin-bottom: 0px;
                 font-size: 18px;
                 text-align: justify;
               `}
             >
-              For an optimal experience, we suggest letting us take care of java
-              for you. Only manually manage java if you know what you&apos;re
-              doing, it may result in GDLauncher not working!
+              MinecraftではJavaを使用してプレイします。もし、あまりJavaのインストールについて知識がないのであれば『AutomaticSetup』をおすすめします。
+              Java64bitをすでに使っていて自分で設定できるのであれば《ManualSetup》でjava.exeを選択してください。
             </div>
 
             <div
@@ -113,7 +112,7 @@ const JavaSetup = () => {
                 }
               `}
             >
-              <h3>Missing Versions:</h3>
+              <h3>Javaが見つかりません:</h3>
               <div
                 css={`
                   display: flex;
@@ -169,7 +168,7 @@ const JavaSetup = () => {
               </div>
               <div>
                 <Button
-                  type="text"
+                  type="danger"
                   css={`
                     width: 150px;
                   `}
@@ -243,10 +242,9 @@ const ManualSetup = ({ setStep }) => {
           font-size: 18px;
         `}
       >
-        Enter the required paths to java. Java 8 will be used for all the
-        versions {'<'} 1.17, java {LATEST_JAVA_VERSION} for versions {'>='}{' '}
-        1.17. You can also use the same executable but some versions might not
-        run.
+        実行可能なJava.exeを設定してください。 Java 8
+        はMC1.16.5以下で使用され、Java {LATEST_JAVA_VERSION}{' '}
+        はMC1.17以上で使用されます。
       </div>
 
       <div
@@ -257,7 +255,7 @@ const ManualSetup = ({ setStep }) => {
         `}
       >
         <Input
-          placeholder="Select your Java8 executable (MC < 1.17)"
+          placeholder="jdk 8 ,jre 8 .../java.exe (MC =< 1.16.5)"
           onChange={e => setJavaPath(e.target.value)}
           value={javaPath}
         />
@@ -279,7 +277,7 @@ const ManualSetup = ({ setStep }) => {
         `}
       >
         <Input
-          placeholder={`Select your Java ${LATEST_JAVA_VERSION} executable (MC >= 1.17)`}
+          placeholder={`jdk ${LATEST_JAVA_VERSION} ,jre ${LATEST_JAVA_VERSION} .../java.exe (MC >= 1.17)`}
           onChange={e => setJavaLatestPath(e.target.value)}
           value={javaLatestPath}
         />
@@ -561,17 +559,17 @@ const AutomaticSetup = ({
             }
           `}
         >
-          <h2>Java is already installed!</h2>
+          <h2>Java は正常にインストールされました。</h2>
           <div
             css={`
               margin-bottom: 10px;
             `}
           >
-            <h3>Java 8 details:</h3>
+            <h3>Java 8 の詳細:</h3>
             <code>{java8Log}</code>
           </div>
           <div>
-            <h3>Java {LATEST_JAVA_VERSION} details:</h3>
+            <h3>Java {LATEST_JAVA_VERSION} の詳細:</h3>
             <code>{javaLatestLog}</code>
           </div>
         </div>

@@ -7,9 +7,11 @@ import TypeAnimation from 'react-type-animation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBug, faStar, faWrench } from '@fortawesome/free-solid-svg-icons';
 import { useInView } from 'react-intersection-observer';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { Button } from 'antd';
 import Modal from '../../components/Modal';
 import SocialButtons from '../../components/SocialButtons';
-import KoFiButton from '../../assets/ko-fi.png';
+// import KoFiButton from '../../assets/ko-fi.png';
 import UpdateIllustration from '../../assets/update_illustration.png';
 import UpdateIllustrationChristmas from '../../assets/update_illustration_christmas.png';
 import { openModal } from '../../reducers/modals/actions';
@@ -141,9 +143,9 @@ const ChangeLogs = () => {
     <Modal
       css={`
         height: 550px;
-        width: 475px;
+        width: 900px;
       `}
-      title={`What's new in ${version}`}
+      title={`${version} のアップデート内容！`}
       removePadding
     >
       <Container>
@@ -200,35 +202,53 @@ const ChangeLogs = () => {
               }
             `}
           >
-            If you appreciate our work, please consider supporting us through a
-            donation or grab a server from our official partner{' '}
-            <span onClick={openBisectModal}>BisectHosting</span>
+            FelNullが出してる{' '}
+            <span
+              css={`
+                color: ${props => props.theme.palette.colors.green};
+              `}
+            >
+              ModPackやLauncher
+            </span>{' '}
+            などの質問は{' '}
+            <span
+              css={`
+                color: ${props => props.theme.palette.colors.green};
+              `}
+            >
+              Discord
+            </span>{' '}
+            で受け付けております。「
+            <span onClick={openBisectModal}>
+              ここをクリック！FelNullGDLauncher
+            </span>
+            」
           </div>
-          <div
-            css={`
-              display: flex;
-              align-items: center;
-              justify-content: start;
-              margin-bottom: 20px;
-              margin-top: 20px;
-              a:nth-child(1) {
-                margin-right: 20px;
-              }
-              img {
-                border-radius: 30px;
-                height: 40px;
-                cursor: pointer;
-                transition: transform 0.2s ease-in-out;
-                &:hover {
-                  transform: scale(1.05);
-                }
-              }
-            `}
-          >
-            <a href="https://ko-fi.com/gdlauncher">
-              <img src={KoFiButton} alt="Ko-Fi" />
-            </a>
-          </div>
+          {/* <div */}
+          {/*   css={` */}
+          {/*     display: flex; */}
+          {/*     align-items: center; */}
+          {/*     justify-content: start; */}
+          {/*     margin-bottom: 20px; */}
+          {/*     margin-top: 20px; */}
+          {/*     a:nth-child(1) { */}
+          {/*       margin-right: 20px; */}
+          {/*     } */}
+          {/*     img { */}
+          {/*       border-radius: 30px; */}
+          {/*       height: 40px; */}
+          {/*       cursor: pointer; */}
+          {/*       transition: transform 0.2s ease-in-out; */}
+          {/*       &:hover { */}
+          {/*         transform: scale(1.05); */}
+          {/*       } */}
+          {/*     } */}
+          {/*   `} */}
+          {/* > */}
+          {/*   <a href="https://ko-fi.com/gdlauncher"> */}
+          {/*     <img src={KoFiButton} alt="Ko-Fi" /> */}
+          {/*   </a> */}
+          {/* </div> */}
           <a
             css={`
               margin-top: 20px;
@@ -236,9 +256,7 @@ const ChangeLogs = () => {
             `}
             onClick={() => setShowAdvanced(!showAdvanced)}
           >
-            {showAdvanced
-              ? 'Hide extended information'
-              : 'Show extended information'}
+            {showAdvanced ? '詳細な情報を隠す' : '詳細な情報を表示'}
           </a>
         </Header>
         <Section>
@@ -261,7 +279,7 @@ const ChangeLogs = () => {
                     font-size: 20px;
                   `}
                 />
-                New
+                新機能
               </span>
             </SectionTitle>
           ) : null}
@@ -297,7 +315,7 @@ const ChangeLogs = () => {
                     font-size: 20px;
                   `}
                 />
-                Improved
+                改善
               </span>
             </SectionTitle>
           ) : null}
@@ -333,7 +351,7 @@ const ChangeLogs = () => {
                     font-size: 20px;
                   `}
                 />
-                Bug Fixes
+                修正
               </span>
             </SectionTitle>
           ) : null}
@@ -348,6 +366,38 @@ const ChangeLogs = () => {
               />
             ))}
           </ul>
+        </Section>
+
+        <Section>
+          <SectionTitle
+            css={`
+              color: ${props => props.theme.palette.colors.jungleGreen};
+            `}
+          >
+            <span>GDLauncher License</span>
+          </SectionTitle>
+          <p>
+            This project is licensed under the GNU GPL V3.0 - see the GitHub
+            <br />
+            LICENSE file for details. The parent project is "GDLauncher".
+            <br />
+            FelNullGDLauncherはgorilla-devs/GDLauncherをベースに作成されています。
+          </p>
+          <Button
+            css={`
+              width: 200px;
+              height: 40px;
+              font-size: 20px;
+              padding: 4px !important;
+              margin-top: 3px;
+              margin-bottom: 10px;
+            `}
+            type="primary"
+            href="https://github.com/TeamFelnull/FelNullGDLauncher/blob/master/LICENSE"
+          >
+            <FontAwesomeIcon icon={faGithub} />
+            &nbsp; LICENSE
+          </Button>
         </Section>
       </Container>
       <div
@@ -364,14 +414,14 @@ const ChangeLogs = () => {
         `}
       >
         <SocialButtons />
-        <span
-          css={`
-            padding-left: 20px;
-            color: ${props => props.theme.palette.text.secondary};
-          `}
-        >
-          Follow us for more updates
-        </span>
+        {/* <span */}
+        {/*   css={` */}
+        {/*     padding-left: 20px; */}
+        {/*     color: ${props => props.theme.palette.text.secondary}; */}
+        {/*   `} */}
+        {/* > */}
+        {/*   Follow us for more updates */}
+        {/* </span> */}
       </div>
     </Modal>
   );

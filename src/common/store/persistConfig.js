@@ -3,9 +3,9 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 localForage.config({
   driver: localForage.INDEXEDDB,
-  name: 'gdlauncher',
+  name: 'felnullgdlauncher',
   version: 1.0,
-  storeName: 'gdlauncher_persist'
+  storeName: 'felnullgdlauncher_persist'
 });
 
 export default {

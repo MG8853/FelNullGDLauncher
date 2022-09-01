@@ -48,7 +48,7 @@ const InstanceStartupAd = ({ instanceName }) => {
             margin-top: 20px;
           `}
         >
-          Your instance is starting...
+          インスタンスを起動しています...
           <LoadingOutlined
             css={`
               margin-left: 30px;
@@ -72,7 +72,7 @@ const InstanceStartupAd = ({ instanceName }) => {
               font-size: 14px;
             `}
           >
-            Grab a server from <br /> our official partner
+            FelNullGDLauncher <br /> を使ってくれてありがとう！
           </span>
           <div
             css={`
@@ -85,17 +85,17 @@ const InstanceStartupAd = ({ instanceName }) => {
               showPointerCursor
             />
           </div>
-          <div>
-            <span
-              css={`
-                font-size: 70px;
-                color: ${({ theme }) => theme.palette.colors.red};
-              `}
-            >
-              &#10084;
-            </span>
-            <div>Thank you!</div>
-          </div>
+          {/* <div> */}
+          {/*   <span */}
+          {/*     css={` */}
+          {/*       font-size: 70px; */}
+          {/*       color: ${({ theme }) => theme.palette.colors.red}; */}
+          {/*     `} */}
+          {/*   > */}
+          {/*     &#10084; */}
+          {/*   </span> */}
+          {/*   <div>Thank you!</div> */}
+          {/* </div> */}
         </div>
       </div>
     </Modal>

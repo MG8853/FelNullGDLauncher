@@ -14,10 +14,10 @@
     <array>
       <dict>
         <key>CFBundleURLName</key>
-        <string>GDLauncher handler</string>
+        <string>FelNullGDLauncher handler</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>gdlauncher</string>
+          <string>felnullgdlauncher</string>
         </array>
       </dict>
     </array>

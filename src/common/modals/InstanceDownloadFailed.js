@@ -61,10 +61,10 @@ const InstanceDownloadFailed = ({
         overflow-x: hidden;
       `}
       preventClose={preventClose}
-      title={`Instance Download Failed - ${ellipsedName}`}
+      title={`インスタンスのダウンロードに失敗 - ${ellipsedName}`}
     >
       <div>
-        The download for {instanceName} failed.
+        {instanceName} のダウンロードに失敗しました。
         <div
           css={`
             background: ${props => props.theme.palette.grey[900]};
@@ -75,7 +75,7 @@ const InstanceDownloadFailed = ({
           {'> '}
           {error.toString()}
         </div>
-        <div>What do you want to do?</div>
+        <div>どうしますか？</div>
         <div
           css={`
             margin-top: 50px;
@@ -90,10 +90,10 @@ const InstanceDownloadFailed = ({
             onClick={cancelDownload}
             loading={loading}
           >
-            Cancel Download
+            ダウンロードをキャンセルする
           </Button>
           <Button danger type="primary" onClick={retry} disabled={loading}>
-            Retry Download
+            ダウンロードを再度実行する
           </Button>
         </div>
       </div>

@@ -26,7 +26,7 @@ const main = async () => {
 
   try {
     const { data: releasesList } = await axios.default.get(
-      `https://api.github.com/repos/gorilla-devs/GDLauncher/releases`,
+      `https://api.github.com/repos/TeamFelnull/FelNullGDLauncher/releases`,
       {
         headers: {
           Authorization: `token ${process.env.GH_ACCESS_TOKEN_RELEASES}`
@@ -73,7 +73,7 @@ const main = async () => {
     };
 
     const { data: newRelease } = await axios.default.post(
-      'https://api.github.com/repos/gorilla-devs/GDLauncher/releases',
+      'https://api.github.com/repos/TeamFelnull/FelNullGDLauncher/releases',
       {
         tag_name: `v${version}`,
         name: `v${version}`,

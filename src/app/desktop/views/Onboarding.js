@@ -11,7 +11,7 @@ import {
 import backgroundVideo from '../../../common/assets/onboarding.webm';
 import { _getCurrentAccount } from '../../../common/utils/selectors';
 import BisectHosting from '../../../ui/BisectHosting';
-import KoFiButton from '../../../common/assets/ko-fi.png';
+// import KoFiButton from '../../../common/assets/ko-fi.png';
 import { openModal } from '../../../common/reducers/modals/actions';
 
 const Background = styled.div`
@@ -125,7 +125,7 @@ const Home = () => {
             padding: 0 120px;
           `}
         >
-          {account.selectedProfile.name}, welcome to GDLauncher!
+          {account.selectedProfile.name}, Welcome to FelNullGDLauncher!
         </div>
       </div>
       <div
@@ -148,9 +148,27 @@ const Home = () => {
             margin: 20% 10%;
           `}
         >
-          GDlauncher is completely free and open source. <br />
-          If you want to support us, consider renting a server on BisectHosting,
-          our official partner!
+          {/* GDlauncher is completely free and open source. <br /> */}
+          {/* If you want to support us, consider renting a server on BisectHosting, */}
+          {/* our official partner! */}
+          {/* <br /> */}
+          {/* <br /> */}
+          {/* <div */}
+          {/*   css={` */}
+          {/*     cursor: pointer; */}
+          {/*   `} */}
+          {/* > */}
+          {/*   <BisectHosting */}
+          {/*     showPointerCursor */}
+          {/*     size={100} */}
+          {/*     onClick={() => dispatch(openModal('BisectHosting'))} */}
+          {/*   /> */}
+          {/* </div> */}
+          このLauncherはGDLauncherをもとに製作されています。
+          <br />
+          サポートが必要であれば
+          <br />
+          次のページのDiscordにてお願いします。
           <br />
           <br />
           <div
@@ -166,6 +184,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+
       <div
         ref={forthSlideRef}
         css={`
@@ -186,18 +205,14 @@ const Home = () => {
             margin: 20%;
           `}
         >
-          Or you can also support us through Ko-Fi.
-          <div
-            css={`
-              margin: 40px;
-            `}
-          >
-            <a href="https://ko-fi.com/gdlauncher">
-              <img src={KoFiButton} alt="Ko-Fi" />
-            </a>
-          </div>
+          This project is licensed under the GNU GPL V3.0 - see the GitHub
+          <br />
+          LICENSE file for details. The parent project is GDLauncher.
+          <br />
+          FelNullGDLauncherはgorilla-devs/GDLauncherをベースに作成されています。
         </div>
       </div>
+
       <div
         ref={fifthSlideRef}
         css={`
@@ -222,13 +237,12 @@ const Home = () => {
             margin: 20%;
           `}
         >
-          Also, don&apos;t forget to join us on Discord! This is where our
-          community is!
+          [Connect]をクリック！
           <iframe
             css={`
               margin-top: 40px;
             `}
-            src="https://discordapp.com/widget?id=398091532881756161&theme=dark"
+            src="https://discordapp.com/widget?id=600929948529590272&theme=dark"
             width="350"
             height="410"
             allowTransparency="true"

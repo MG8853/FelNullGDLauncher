@@ -64,8 +64,8 @@ if (gotTheLock) {
   app.quit();
 }
 
-if (!app.isDefaultProtocolClient('gdlauncher')) {
-  app.setAsDefaultProtocolClient('gdlauncher');
+if (!app.isDefaultProtocolClient('felnullgdlauncher')) {
+  app.setAsDefaultProtocolClient('felnullgdlauncher');
 }
 
 // This gets rid of this: https://github.com/electron/electron/issues/13186
@@ -78,10 +78,10 @@ const edit = [
   ...(process.platform === 'darwin'
     ? [
         {
-          label: 'GDLauncher',
+          label: 'FelNullGDLauncher',
           submenu: [
             {
-              label: 'About GDLauncher',
+              label: 'About FelNullGDLauncher',
               role: 'about'
             },
             { type: 'separator' },
@@ -92,7 +92,7 @@ const edit = [
             },
             { type: 'separator' },
             {
-              label: 'Hide GDLauncher',
+              label: 'Hide FelNullGDLauncher',
               accelerator: 'Command+H',
               role: 'hide'
             },
@@ -107,7 +107,7 @@ const edit = [
             },
             { type: 'separator' },
             {
-              label: 'Quit GDLauncher',
+              label: 'Quit FelNullGDLauncher',
               accelerator: 'Command+Q',
               click: () => {
                 app.quit();
@@ -168,7 +168,10 @@ const userAgent = new UserAgent({
 // app.allowRendererProcessReuse = true;
 Menu.setApplicationMenu(Menu.buildFromTemplate(edit));
 
-app.setPath('userData', path.join(app.getPath('appData'), 'gdlauncher_next'));
+app.setPath(
+  'userData',
+  path.join(app.getPath('appData'), 'felnullgdlauncher_next')
+);
 
 let allowUnstableReleases = false;
 const releaseChannelExists = fss.existsSync(

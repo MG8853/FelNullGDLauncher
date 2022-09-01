@@ -160,7 +160,7 @@ export default function MyAccountPreferences() {
             dispatch(openModal('JavaSetup'));
           }}
         >
-          Run Java Setup again
+          再度Javaをセットアップ
         </a>
       </Title>
       <AutodetectPath>
@@ -169,9 +169,8 @@ export default function MyAccountPreferences() {
             text-align: left;
           `}
         >
-          Disable this to specify a custom java path to use instead of using
-          OpenJDK shipped with GDLauncher. If that is the case, select the path
-          to your Java executable.
+          これを無効にした場合、自分でjava.exe(64bit)を選択する必要があります。
+          自動でJavaをセットアップした場合AdoptOpenJDK-HotSpotを使用します。
         </Paragraph>
         <Switch
           color="primary"
@@ -315,7 +314,8 @@ export default function MyAccountPreferences() {
             margin: 0;
           `}
         >
-          Select the initial game resolution in pixels (width x height).
+          マイクラ起動時のウィンドウサイズを指定します 「width：横 x
+          height：縦」
         </Paragraph>
         <ResolutionInputContainer>
           <div>
@@ -338,7 +338,7 @@ export default function MyAccountPreferences() {
             />
           </div>
           <Select
-            placeholder="Presets"
+            placeholder="プリセット"
             onChange={v => {
               const w = parseInt(v.split('x')[0], 10);
               const h = parseInt(v.split('x')[1], 10);
@@ -385,7 +385,7 @@ export default function MyAccountPreferences() {
             margin: 0;
           `}
         >
-          Select the preferred amount of memory to use when launching the game.
+          マイクラに使用する最大メモリ量を選択します。※パソコンの利用可能なメモリ量を超えて設定するとメモリの限界まで使用されます。
         </Paragraph>
         <div
           css={`
@@ -434,7 +434,7 @@ export default function MyAccountPreferences() {
             text-align: left;
           `}
         >
-          Select the preferred custom arguments to use when launching the game.
+          マイクラに使用する引数を設定します。※高度な設定
         </Paragraph>
         <div
           css={`
@@ -475,8 +475,8 @@ export default function MyAccountPreferences() {
               text-align: left;
             `}
           >
-            Select the preferred Minecraft startup method. Only change this if
-            you&apos;re experiencing issues with the default one.
+            希望するMinecraftの起動方法を設定します。
+            Defaultで問題が発生する場合は、Symlinkに変更してみてください。
           </Paragraph>
           <Select
             value={mcStartupMethod}

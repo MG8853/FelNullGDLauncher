@@ -67,7 +67,7 @@ const Notes = ({ instanceName }) => {
             <TextEditor
               renderElement={renderElement}
               renderLeaf={renderLeaf}
-              placeholder="Enter some notes..."
+              placeholder="ここはメモ帳みたいなものです。インスタンスの説明書として利用するのもありかも..."
               spellCheck
               autoFocus
             />

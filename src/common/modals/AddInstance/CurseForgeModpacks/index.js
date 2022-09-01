@@ -81,7 +81,7 @@ const CurseForgeModpacks = ({ setStep, setVersion, setModpack }) => {
           defaultValue={null}
           virtual={false}
         >
-          <Select.Option value={null}>All Versions</Select.Option>
+          <Select.Option value={null}>全バージョン</Select.Option>
           {(mcVersions || [])
             .filter(v => v?.type === 'release')
             .map(v => (
@@ -97,7 +97,7 @@ const CurseForgeModpacks = ({ setStep, setVersion, setModpack }) => {
           virtual={false}
         >
           <Select.Option key="allcategories" value={null}>
-            All Categories
+            全カテゴリ
           </Select.Option>
           {(categories || [])
             .filter(v => v?.classId === 4471)
@@ -133,26 +133,26 @@ const CurseForgeModpacks = ({ setStep, setVersion, setModpack }) => {
           virtual={false}
         >
           <Select.Option key="Featured" value="Featured">
-            Featured
+            注目
           </Select.Option>
           <Select.Option key="Popularity" value="Popularity">
-            Popularity
+            人気
           </Select.Option>
           <Select.Option key="LastUpdated" value="LastUpdated">
-            Last Updated
+            最新
           </Select.Option>
           <Select.Option key="Name" value="Name">
-            Name
+            ModPack名
           </Select.Option>
           <Select.Option key="Author" value="Author">
-            Author
+            作成者名
           </Select.Option>
           <Select.Option key="TotalDownloads" value="TotalDownloads">
-            Total Downloads
+            最多ダウンロード
           </Select.Option>
         </StyledSelect>
         <StyledInput
-          placeholder="Search..."
+          placeholder="検索..."
           onSearch={setSearchText}
           onChange={e => setSearchText(e.target.value)}
           style={{ width: 200 }}
@@ -177,7 +177,7 @@ const CurseForgeModpacks = ({ setStep, setVersion, setModpack }) => {
                   margin-top: 70px;
                 `}
               >
-                No modpack has been found with the current filters.
+                ModPackが見つかりませんでした。
               </div>
             </div>
           ) : (
@@ -215,7 +215,7 @@ const CurseForgeModpacks = ({ setStep, setVersion, setModpack }) => {
                 margin-top: 70px;
               `}
             >
-              An error occurred while loading the modpacks list...
+              ModPackリストのロード中にエラーが発生しました...
             </div>
           </div>
         )}

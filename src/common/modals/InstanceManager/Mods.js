@@ -867,7 +867,7 @@ const Mods = ({ instanceName }) => {
           )}
         </Transition>
         {mods.length === 0 && (
-          <NotItemsAvailable>No Mods Available</NotItemsAvailable>
+          <NotItemsAvailable>Modがありません</NotItemsAvailable>
         )}
         <AutoSizer>
           {({ height, width }) => (

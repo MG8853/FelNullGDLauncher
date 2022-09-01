@@ -216,7 +216,7 @@ const Screenshots = ({ instanceName }) => {
             if (selectedItems.length) {
               dispatch(
                 openModal('ActionConfirmation', {
-                  message: 'Are you sure you want to delete this image(s)?',
+                  message: '削除してもよろしいですか？',
                   confirmCallback: deleteFile,
                   title: 'Confirm'
                 })
@@ -306,7 +306,7 @@ const Screenshots = ({ instanceName }) => {
                               dispatch(
                                 openModal('ActionConfirmation', {
                                   message:
-                                    'Are you sure you want to delete this image?',
+                                    '削除してもよろしいですか？',
                                   fileName: file.name,
                                   confirmCallback: deleteFile,
                                   title: 'Confirm'
@@ -326,7 +326,7 @@ const Screenshots = ({ instanceName }) => {
                                 dispatch(
                                   openModal('ActionConfirmation', {
                                     message:
-                                      'Are you sure you want to delete this image?',
+                                      '削除してもよろしいですか？',
                                     fileName: file.name,
                                     confirmCallback: deleteFile,
                                     title: 'Confirm'
@@ -397,7 +397,7 @@ const Screenshots = ({ instanceName }) => {
                                       uploadingFileName,
                                       selectedItems
                                     )
-                                  : `Image too big... ${Math.floor(
+                                  : `画像が大きすぎます... ${Math.floor(
                                       file.size / 1024 / 1024
                                     )}MB`}
                               </MenuShareLink>
@@ -417,7 +417,7 @@ const Screenshots = ({ instanceName }) => {
                                 dispatch(
                                   openModal('ActionConfirmation', {
                                     message:
-                                      'Are you sure you want to delete this image?',
+                                      '削除してもよろしいですか？',
                                     fileName: file.name,
                                     confirmCallback: deleteFile,
                                     title: 'Confirm'
@@ -438,7 +438,7 @@ const Screenshots = ({ instanceName }) => {
             );
           })
         ) : (
-          <NoScreenAvailable>No Screenshot Available</NoScreenAvailable>
+          <NoScreenAvailable>画像はありません</NoScreenAvailable>
         )}
       </Container>
     </ExternalContainer>

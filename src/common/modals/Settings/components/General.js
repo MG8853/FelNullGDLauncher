@@ -200,7 +200,7 @@ const General = () => {
       .invoke('getAppdataPath')
       .then(appData =>
         fsa
-          .readFile(path.join(appData, 'gdlauncher_next', 'rChannel'))
+          .readFile(path.join(appData, 'felnullgdlauncher_next', 'rChannel'))
           .then(v => setReleaseChannel(parseInt(v.toString(), 10)))
           .catch(() => setReleaseChannel(0))
       )
@@ -222,7 +222,7 @@ const General = () => {
   const changeDataPath = async () => {
     setLoadingMoveUserData(true);
     const appData = await ipcRenderer.invoke('getAppdataPath');
-    const appDataPath = path.join(appData, 'gdlauncher_next');
+    const appDataPath = path.join(appData, 'felnullgdlauncher_next');
 
     const notCopiedFiles = [
       'Cache',
@@ -319,10 +319,7 @@ const General = () => {
       </PersonalData>
       <Title>Release Channel</Title>
       <Content>
-        <p>
-          Stable updates once a month. Beta updates more often, but it may have
-          more bugs.
-        </p>
+        <p>FelNullGDLauncherの更新するときに使用するリリースを設定します。</p>
         <Select
           css={`
             width: 100px;
@@ -331,7 +328,7 @@ const General = () => {
             const appData = await ipcRenderer.invoke('getAppdataPath');
             setReleaseChannel(e);
             await fsa.writeFile(
-              path.join(appData, 'gdlauncher_next', 'rChannel'),
+              path.join(appData, 'felnullgdlauncher_next', 'rChannel'),
               e.toString()
             );
           }}
@@ -347,8 +344,7 @@ const General = () => {
       </Title>
       <Content>
         <p>
-          Select the number of concurrent downloads. If you have a slow
-          connection, select at most 3.
+          同時にダウンロードやインストールをできる最大値を設定します。「推奨：３」
         </p>
         <Select
           onChange={v => dispatch(updateConcurrentDownloads(v))}
@@ -378,7 +374,7 @@ const General = () => {
             width: 400px;
           `}
         >
-          Select the method in which instances should be sorted.
+          インスタンスの並び順を設定します。
         </p>
 
         <Select
@@ -399,8 +395,7 @@ const General = () => {
       </Title>
       <Content>
         <p>
-          Select the preferred release channel for downloading Curse projects.
-          This also applies for mod updates.
+          Twitch・Curseのプロジェクトをダウンロードするときに優先するリリースを設定します。これはModPackの更新にも適用されます。
         </p>
         <Select
           css={`
@@ -420,10 +415,7 @@ const General = () => {
         Discord Integration &nbsp; <FontAwesomeIcon icon={faDiscord} />
       </Title>
       <Content>
-        <p>
-          Enable / disable Discord Integration. This displays what you are
-          playing in Discord.
-        </p>
+        <p>有効にするとDiscordで～～～プレイ中の表示をすることができます。</p>
         <Switch
           onChange={e => {
             dispatch(updateDiscordRPC(e));
@@ -440,7 +432,9 @@ const General = () => {
         Minecraft News &nbsp; <FontAwesomeIcon icon={faNewspaper} />
       </Title>
       <Content>
-        <p>Enable / disable Minecraft news.</p>
+        <p>
+          有効にするとMinecraft公式の最新のニュースをホームに表示します。(英字ニュースがほとんどだけど)
+        </p>
         <Switch
           onChange={e => {
             dispatch(updateShowNews(e));
@@ -453,8 +447,7 @@ const General = () => {
       </Title>
       <Content>
         <p>
-          Automatically hide the launcher when launching an instance. You will
-          still be able to open it from the icon tray.
+          有効にしてマインクラフトを起動するとランチャーを自動的に非表示にします。タスクバーのトレイから再度開くことができます。
         </p>
         <Switch
           onChange={e => {
@@ -468,8 +461,7 @@ const General = () => {
       </Title>
       <Content>
         <p>
-          You got a potato PC? Don&apos;t worry! We got you covered. Enable this
-          and all animations and special effects will be disabled.
+          あなたのパソコンはそんなに性能が低いのですか？これを有効にするとすべてのアニメーションと特殊効果が無効になり少し快適になるかもしれません！
         </p>
         <Switch
           onChange={e => {
@@ -482,15 +474,12 @@ const General = () => {
         Clear Shared Data&nbsp; <FontAwesomeIcon icon={faTrash} />
       </Title>
       <Content>
-        <p>
-          Deletes all the shared files between instances. Doing this will remove
-          ALL instance data.
-        </p>
+        <p>今までのマイクラのデータをすべて削除します。</p>
         <Button
           onClick={() => {
             dispatch(
               openModal('ActionConfirmation', {
-                message: 'Are you sure you want to delete shared data?',
+                message: '本当に削除しても良いのですか？',
                 confirmCallback: clearSharedData,
                 title: 'Confirm'
               })
@@ -510,11 +499,11 @@ const General = () => {
           `}
           onClick={async () => {
             const appData = await ipcRenderer.invoke('getAppdataPath');
-            const appDataPath = path.join(appData, 'gdlauncher_next');
+            const appDataPath = path.join(appData, 'felnullgdlauncher_next');
             setDataPath(appDataPath);
           }}
         >
-          Reset Path
+          パスをリセットする
         </a>
       </Title>
       <CustomDataPathContainer>
@@ -579,7 +568,7 @@ const General = () => {
               setMoveUserData(e.target.checked);
             }}
           >
-            Copy current data to the new directory
+            データを古いフォルダから新しいフォルダへ移動する
           </Checkbox>
         </div>
       </CustomDataPathContainer>
@@ -606,8 +595,8 @@ const General = () => {
         </div>
         <p>
           {updateAvailable
-            ? 'There is an update available to be installed. Click on update to install it and restart the launcher.'
-            : 'You’re currently on the latest version. We automatically check for updates and we will inform you whenever one is available.'}
+            ? 'アップデートがあります。今すぐ更新しましょう！'
+            : 'アップデートはありません。最新版のランチャーを使用しています。'}
         </p>
         <div
           css={`
@@ -627,7 +616,7 @@ const General = () => {
               `}
               type="primary"
             >
-              Update &nbsp;
+              アップデートを実行する！ &nbsp;
               <FontAwesomeIcon icon={faDownload} />
             </Button>
           ) : (
@@ -638,7 +627,7 @@ const General = () => {
                 padding: 6px 8px;
               `}
             >
-              Up to date
+              Latest
             </div>
           )}
         </div>

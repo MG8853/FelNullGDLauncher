@@ -5,6 +5,22 @@ const TermsAndConditions = () => {
     <>
       <h1>Terms and Conditions</h1>
       <div>
+        <h2>規約と条件について</h2>
+        <div>
+          <p>
+            FelNullGDLauncherは、Fork元「GDLauncher」のTerms and
+            Conditionsを使用します。{' '}
+            <a
+              target="_blank"
+              rel="nofollow noreferrer"
+              href="https://gdlauncher.com"
+            >
+              gdlauncher.com
+            </a>{' '}
+          </p>
+        </div>
+      </div>
+      <div>
         <h2>Introduction</h2>
         <div>
           <p>

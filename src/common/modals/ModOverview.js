@@ -79,9 +79,9 @@ const ModOverview = ({
     if (loadingFiles) {
       return 'Loading files';
     } else if (files.length === 0 && !loadingFiles) {
-      return 'Mod not available';
+      return 'このModは利用できません';
     } else {
-      return 'Select a version';
+      return 'バージョン選択';
     }
   };
 
@@ -214,9 +214,7 @@ const ModOverview = ({
                   font-weight: 700;
                 `}
               >
-                The installed version of this mod has been removed from
-                CurseForge, so you will only be able to get it as part of legacy
-                modpacks.
+                このmodのバージョンはすでにTwitchから削除されているため、LegacyModPackの一部としてのみ取得できます。
               </div>
             )}
           <StyledSelect

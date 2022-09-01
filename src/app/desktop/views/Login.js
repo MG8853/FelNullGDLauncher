@@ -24,7 +24,7 @@ const LoginButton = styled(Button)`
     props.active ? props.theme.palette.grey[600] : 'transparent'};
   border: 0;
   height: auto;
-  margin-top: 20px;
+  margin-top: 30px;
   text-align: center;
   color: ${props => props.theme.palette.text.primary};
   &:hover {
@@ -75,7 +75,7 @@ const Form = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  margin: 20px 0 !important;
+  margin: 30px 0 !important;
 `;
 
 const Background = styled.div`
@@ -193,6 +193,7 @@ const Login = () => {
             <Header>
               <HorizontalLogo size={200} />
             </Header>
+            <p>Mojangアカウントログイン</p>
             <Form>
               <div>
                 <Input
@@ -213,7 +214,7 @@ const Login = () => {
                 <LoginFailMessage>{loginFailed?.message}</LoginFailMessage>
               )}
               <LoginButton color="primary" onClick={authenticate}>
-                Sign In
+                サインイン
                 <FontAwesomeIcon
                   css={`
                     margin-left: 6px;
@@ -225,7 +226,7 @@ const Login = () => {
                 color="primary"
                 onClick={authenticateMicrosoft}
               >
-                Sign in with Microsoft
+                Microsoftでサインイン
                 <FontAwesomeIcon
                   css={`
                     margin-left: 6px;
@@ -245,8 +246,8 @@ const Login = () => {
               >
                 <FooterLinks>
                   <div>
-                    <a href="https://www.minecraft.net/it-it/password/forgot">
-                      FORGOT PASSWORD
+                    <a href="https://www.minecraft.net/ja-jp/password/forgot/">
+                      パスワードを忘れた
                     </a>
                   </div>
                 </FooterLinks>
@@ -264,8 +265,7 @@ const Login = () => {
                   font-size: 10px;
                 `}
               >
-                Sign in with your Mojang Account. By doing so, you accept all
-                our policies and terms stated below.
+                サインインすると以下に記載されているポリシーに同意したことになります。
               </p>
               <div
                 css={`
