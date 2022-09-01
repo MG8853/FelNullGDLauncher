@@ -50,7 +50,7 @@
 
             FileClose $4
 
-            RMDir /r "$APPDATA\gdlauncher_next"
+            RMDir /r "$APPDATA\felnullgdlauncher_next"
             Goto done
         Skipped:
             Goto done

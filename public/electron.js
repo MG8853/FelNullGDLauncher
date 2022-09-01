@@ -351,7 +351,7 @@ function createWindow() {
   tray = new Tray(nimage);
   const trayMenuTemplate = [
     {
-      label: 'GDLauncher',
+      label: 'FelNullGDLauncher',
       enabled: false
     },
     {
@@ -362,7 +362,7 @@ function createWindow() {
 
   const trayMenu = Menu.buildFromTemplate(trayMenuTemplate);
   tray.setContextMenu(trayMenu);
-  tray.setToolTip('GDLauncher');
+  tray.setToolTip('FelNullGDLauncher');
   tray.on('double-click', () => mainWindow.show());
 
   mainWindow.loadURL(
@@ -370,7 +370,7 @@ function createWindow() {
       ? 'http://localhost:3000'
       : `file://${path.join(__dirname, '../build/index.html')}`,
     {
-      userAgent: 'GDLauncher'
+      userAgent: 'FelNullGDLauncher'
     }
   );
   if (isDev) {
@@ -893,8 +893,8 @@ if (process.env.REACT_APP_RELEASE_TYPE === 'setup') {
     !allowUnstableReleases && app.getVersion().includes('beta');
   autoUpdater.allowPrerelease = allowUnstableReleases;
   autoUpdater.setFeedURL({
-    owner: 'gorilla-devs',
-    repo: 'GDLauncher',
+    owner: 'TeamFelnull',
+    repo: 'FelNullGDLauncher',
     provider: 'github'
   });
 

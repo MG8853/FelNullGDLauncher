@@ -124,8 +124,8 @@ const commonConfig = {
   config: {
     generateUpdatesFilesForAllChannels: true,
     npmRebuild: false,
-    productName: 'GDLauncher',
-    appId: 'org.gorilladevs.GDLauncher',
+    productName: 'FelNullGDLauncher',
+    appId: 'org.TeamFelNull.FelNullGDLauncher',
     files: [
       '!node_modules/**/*',
       'build/**/*',
@@ -182,9 +182,9 @@ const commonConfig = {
     },
     protocols: [
       {
-        name: 'gdlauncher',
+        name: 'felnullgdlauncher',
         role: 'Viewer',
-        schemes: ['gdlauncher']
+        schemes: ['felnullgdlauncher']
       }
     ]
   },
