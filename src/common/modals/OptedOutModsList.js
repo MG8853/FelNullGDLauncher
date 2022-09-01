@@ -175,7 +175,7 @@ const OptedOutModsList = ({
           300
         );
       }}
-      title="Opted out mods list"
+      title="マニュアルダウンロード"
     >
       <Container>
         <div
@@ -184,10 +184,10 @@ const OptedOutModsList = ({
             margin-bottom: 2rem;
           `}
         >
-          Hey oh! It looks like some developers opted out from showing their
-          mods on third-party launchers. We can still attempt to download them
-          automatically. Please click continue and wait for all downloads to
-          finish. Please don&apos;t click anything inside the browser.
+          一部の開発者は、サードパーティのランチャーでModをダウンロードできないようにしているようです。
+          引き続き自動APIでダウンロードを試みてみます。「Confirm」をクリックしてください。
+          ＊すべてのダウンロードが完了するまでお待ちください。
+          ＊ブラウザが開きますが何もクリックしないでください。
         </div>
         <ModsContainer>
           {optedOutMods &&
