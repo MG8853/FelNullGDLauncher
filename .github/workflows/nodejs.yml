@@ -122,7 +122,7 @@ jobs:
           CI_BUILD_TAG: ''
           RELEASE_TESTING: true
         run: |
-          pm run release
+          npm run release
           
           
 
