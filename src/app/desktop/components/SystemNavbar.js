@@ -180,7 +180,7 @@ const SystemNavbar = () => {
             `}
           >
             <a
-              href="https://gdevs.io/"
+              href="https://felnull.dev"
               rel="noopener noreferrer"
               css={`
                 margin-top: 5px;
@@ -305,7 +305,7 @@ const SystemNavbar = () => {
           <div>
             <DevtoolButton />
             <a
-              href="https://gdevs.io/"
+              href="https://felnull.dev"
               rel="noopener noreferrer"
               css={`
                 margin-top: 5px;
