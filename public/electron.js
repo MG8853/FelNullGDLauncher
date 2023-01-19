@@ -23,8 +23,8 @@ const {
 } = require('base64url');
 const { URL } = require('url');
 const UserAgent = require('user-agents');
-const nsfw = require('./native/nsfw');
-const napi = require('./native/napi');
+const nsfw = require('./nsfw');
+const napi = require('./native/napi.node');
 
 // console.log(napi.fibonacci(10));
 
@@ -244,7 +244,7 @@ const get7zPath = async () => {
     if (process.platform === 'win32') {
       baseDir = path.join(baseDir, '7zip-bin/win/x64');
     } else if (process.platform === 'linux') {
-      baseDir = path.join(baseDir, '7zip-bin/linux/x64');
+      baseDir = path.join(baseDir, '7zip-bin/linux', process.arch);
     } else if (process.platform === 'darwin') {
       baseDir = path.resolve(baseDir, '../../../', '7zip-bin/mac/x64');
     }
