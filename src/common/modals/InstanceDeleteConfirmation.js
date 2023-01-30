@@ -66,7 +66,12 @@ const InstanceDeleteConfirmation = ({ instanceName }) => {
           >
             いいえ
           </Button>
-          <Button onClick={deleteInstance} loading={loading}>
+          <Button
+            danger
+            type="primary"
+            onClick={deleteInstance}
+            loading={loading}
+          >
             完全削除
           </Button>
         </div>

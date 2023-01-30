@@ -3,7 +3,10 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Spin } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faExclamationTriangle,
+  faFileDownload
+} from '@fortawesome/free-solid-svg-icons';
 import { ipcRenderer } from 'electron';
 import styled from 'styled-components';
 import Modal from '../components/Modal';
@@ -56,7 +59,14 @@ const RowContainer = styled.div`
   }
 `;
 
-const ModRow = ({ mod, loadedMods, currentMod, missingMods }) => {
+const ModRow = ({
+  mod,
+  loadedMods,
+  currentMod,
+  missingMods,
+  cloudflareBlock,
+  downloadUrl
+}) => {
   const { modManifest, addon } = mod;
   const loaded = loadedMods.includes(modManifest.id);
   const missing = missingMods.includes(modManifest.id);
@@ -77,14 +87,19 @@ const ModRow = ({ mod, loadedMods, currentMod, missingMods }) => {
   return (
     <RowContainer ref={ref}>
       <div>{`${addon?.name} - ${modManifest?.displayName}`}</div>
-      {loaded && !missing && <div className="dot" />}
-      {loaded && missing && (
+      {loaded && !missing && !cloudflareBlock && <div className="dot" />}
+      {loaded && missing && !cloudflareBlock && (
         <FontAwesomeIcon
           icon={faExclamationTriangle}
           css={`
             color: ${props => props.theme.palette.colors.yellow};
           `}
         />
+      )}
+      {loaded && !missing && cloudflareBlock && (
+        <Button href={downloadUrl}>
+          <FontAwesomeIcon icon={faFileDownload} />
+        </Button>
       )}
       {!loaded && isCurrentMod && (
         <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
@@ -102,6 +117,8 @@ const OptedOutModsList = ({
 }) => {
   const [loadedMods, setLoadedMods] = useState([]);
   const [missingMods, setMissingMods] = useState([]);
+  const [cloudflareBlock, setCloudflareBlock] = useState(false);
+  const [manualDownloadUrls, setManualDownloadUrls] = useState([]);
   const [downloading, setDownloading] = useState(false);
 
   const dispatch = useDispatch();
@@ -135,14 +152,21 @@ const OptedOutModsList = ({
     const listener = (e, status) => {
       if (!status.error) {
         if (optedOutMods.length === loadedMods.length + 1) {
-          if (missingMods.length === 0) {
+          if (missingMods.length === 0 && !cloudflareBlock) {
             resolve();
             dispatch(closeModal());
           }
           setDownloading(false);
         }
         setLoadedMods(prev => [...prev, status.modId]);
-        if (status.warning) setMissingMods(prev => [...prev, status.modId]);
+        if (status.warning) {
+          if (!status.cloudflareBlock) {
+            setMissingMods(prev => [...prev, status.modId]);
+          } else {
+            setCloudflareBlock(true);
+            setManualDownloadUrls(prev => [...prev, status.modId]);
+          }
+        }
       } else {
         dispatch(closeModal());
         setTimeout(() => {
@@ -159,7 +183,7 @@ const OptedOutModsList = ({
         listener
       );
     };
-  }, [loadedMods, missingMods]);
+  }, [loadedMods, missingMods, cloudflareBlock, manualDownloadUrls]);
 
   return (
     <Modal
@@ -178,28 +202,46 @@ const OptedOutModsList = ({
       title="マニュアルダウンロード"
     >
       <Container>
-        <div
-          css={`
-            text-align: left;
-            margin-bottom: 2rem;
-          `}
-        >
-          一部の開発者は、サードパーティのランチャーでModをダウンロードできないようにしているようです。
-          引き続き自動APIでダウンロードを試みてみます。「Confirm」をクリックしてください。
-          ＊すべてのダウンロードが完了するまでお待ちください。
-          ＊ブラウザが開きますが何もクリックしないでください。
-        </div>
+        {!cloudflareBlock && (
+          <div
+            css={`
+              text-align: left;
+              margin-bottom: 2rem;
+            `}
+          >
+            一部の開発者は、サードパーティのランチャーでModをダウンロードできないようにしているようです。
+            引き続き自動APIでダウンロードを試みてみます。「Confirm」をクリックしてください。
+            ＊すべてのダウンロードが完了するまでお待ちください。
+            ＊ブラウザが開きますが何もクリックしないでください。
+          </div>
+        )}
         <ModsContainer>
           {optedOutMods &&
-            optedOutMods.map(mod => (
-              <ModRow
-                mod={mod}
-                loadedMods={loadedMods}
-                currentMod={currentMod}
-                missingMods={missingMods}
-              />
-            ))}
+            optedOutMods.map(mod => {
+              return (
+                <ModRow
+                  mod={mod}
+                  loadedMods={loadedMods}
+                  currentMod={currentMod}
+                  missingMods={missingMods}
+                  cloudflareBlock={cloudflareBlock}
+                  downloadUrl={`${mod.addon.links.websiteUrl}/download/${mod.modManifest.id}`}
+                />
+              );
+            })}
         </ModsContainer>
+        {cloudflareBlock && (
+          <p
+            css={`
+              margin: 20px auto 0 auto;
+            `}
+          >
+            Cloudflareが現在、自動ダウンロードをブロックしています。
+            MODを手動でダウンロードし、MOD フォルダーに配置すると続行できます。
+            上の ダウンロード ボタンと、下の フォルダを開く ボタンを使用して、
+            インスタンス フォルダーを開きます。
+          </p>
+        )}
         <div
           css={`
             display: flex;
@@ -213,7 +255,9 @@ const OptedOutModsList = ({
           <Button
             danger
             type="text"
-            disabled={downloading || loadedMods.length !== 0}
+            disabled={
+              (missingMods.length > 0 && !cloudflareBlock) || downloading
+            }
             onClick={() => {
               dispatch(closeModal());
               setTimeout(
@@ -224,7 +268,7 @@ const OptedOutModsList = ({
           >
             Cancel
           </Button>
-          {missingMods.length === 0 && (
+          {missingMods.length === 0 && !cloudflareBlock && (
             <Button
               type="primary"
               disabled={downloading}
@@ -249,6 +293,7 @@ const OptedOutModsList = ({
                   mods: optedOutMods,
                   instancePath
                 });
+                setDownloading(false);
               }}
               css={`
                 background-color: ${props => props.theme.palette.colors.green};
@@ -257,7 +302,7 @@ const OptedOutModsList = ({
               Confirm
             </Button>
           )}
-          {missingMods.length > 0 && (
+          {missingMods.length > 0 && !cloudflareBlock && (
             <Button
               type="primary"
               disabled={downloading}
@@ -269,8 +314,38 @@ const OptedOutModsList = ({
                 background-color: ${props => props.theme.palette.colors.green};
               `}
             >
-              Continue
+              続行
             </Button>
+          )}
+          {cloudflareBlock && (
+            <>
+              <Button
+                type="primary"
+                disabled={downloading}
+                onClick={() => {
+                  ipcRenderer.invoke('openFolder', instancePath);
+                }}
+                css={`
+                  background-color: ${props => props.theme.palette.colors.blue};
+                `}
+              >
+                フォルダを開く
+              </Button>
+              <Button
+                type="primary"
+                disabled={downloading}
+                onClick={() => {
+                  resolve();
+                  dispatch(closeModal());
+                }}
+                css={`
+                  background-color: ${props =>
+                    props.theme.palette.colors.green};
+                `}
+              >
+                続行
+              </Button>
+            </>
           )}
         </div>
       </Container>
