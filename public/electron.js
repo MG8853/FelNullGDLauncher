@@ -168,7 +168,10 @@ const userAgent = new UserAgent({
 // app.allowRendererProcessReuse = true;
 Menu.setApplicationMenu(Menu.buildFromTemplate(edit));
 
-const baseUserPath = path.join(app.getPath('appData'), 'felnullgdlauncher_next');
+const baseUserPath = path.join(
+  app.getPath('appData'),
+  'felnullgdlauncher_next'
+);
 
 if (!fss.existsSync(baseUserPath)) {
   fss.mkdirSync(baseUserPath);

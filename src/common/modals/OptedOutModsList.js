@@ -312,7 +312,7 @@ const OptedOutModsList = ({
                 background-color: ${props => props.theme.palette.colors.green};
               `}
             >
-              Continue
+              続行
             </Button>
           )}
           {cloudflareBlock && (
@@ -327,7 +327,7 @@ const OptedOutModsList = ({
                   background-color: ${props => props.theme.palette.colors.blue};
                 `}
               >
-                Open folder
+                フォルダを開く
               </Button>
               <Button
                 type="primary"
@@ -341,7 +341,7 @@ const OptedOutModsList = ({
                     props.theme.palette.colors.green};
                 `}
               >
-                Continue
+                続行
               </Button>
             </>
           )}
