@@ -4,7 +4,6 @@ import qs from 'querystring';
 import {
   MOJANG_APIS,
   FORGESVC_URL,
-  MC_MANIFEST_URL,
   FABRIC_APIS,
   JAVA_MANIFEST_URL,
   IMGUR_CLIENT_ID,
@@ -12,10 +11,9 @@ import {
   MICROSOFT_XBOX_LOGIN_URL,
   MICROSOFT_XSTS_AUTH_URL,
   MINECRAFT_SERVICES_URL,
-  FTB_API_URL,
   JAVA_LATEST_MANIFEST_URL
 } from './utils/constants';
-import { sortByDate } from './utils';
+import { sortByDate, getMcManifestUrl } from './utils';
 import ga from './utils/analytics';
 
 const axioInstance = axios.create({
@@ -25,10 +23,6 @@ const axioInstance = axios.create({
     Accept: 'application/json'
   }
 });
-
-const trackFTBAPI = () => {
-  ga.sendCustomEvent('FTBAPICall');
-};
 
 const trackCurseForgeAPI = () => {
   ga.sendCustomEvent('CurseForgeAPICall');
@@ -198,7 +192,7 @@ export const mcInvalidate = (accessToken, clientToken) => {
 };
 
 export const getMcManifest = () => {
-  const url = `${MC_MANIFEST_URL}?timestamp=${new Date().getTime()}`;
+  const url = `${getMcManifestUrl()}?timestamp=${new Date().getTime()}`;
   return axios.get(url);
 };
 
@@ -365,48 +359,4 @@ export const getSearch = async (
 
   const { data } = await axioInstance.get(url, { params });
   return data?.data;
-};
-
-export const getFTBModpackData = async modpackId => {
-  trackFTBAPI();
-  try {
-    const url = `${FTB_API_URL}/modpack/${modpackId}`;
-    const { data } = await axios.get(url);
-    return data;
-  } catch {
-    return { status: 'error' };
-  }
-};
-
-export const getFTBModpackVersionData = async (modpackId, versionId) => {
-  trackFTBAPI();
-  try {
-    const url = `${FTB_API_URL}/modpack/${modpackId}/${versionId}`;
-    const { data } = await axios.get(url);
-    return data;
-  } catch {
-    return { status: 'error' };
-  }
-};
-export const getFTBChangelog = async (modpackId, versionId) => {
-  trackFTBAPI();
-  try {
-    const url = `https://api.modpacks.ch/public/modpack/${modpackId}/${versionId}/changelog`;
-    const { data } = await axios.get(url);
-    return data;
-  } catch {
-    return { status: 'error' };
-  }
-};
-
-export const getFTBMostPlayed = async () => {
-  trackFTBAPI();
-  const url = `${FTB_API_URL}/modpack/popular/plays/1000`;
-  return axios.get(url);
-};
-
-export const getFTBSearch = async searchText => {
-  trackFTBAPI();
-  const url = `${FTB_API_URL}/modpack/search/1000?term=${searchText}`;
-  return axios.get(url);
 };
